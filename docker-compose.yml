@@ -1,0 +1,16 @@
+services:
+  database:
+    image: 'mariadb:11.6'
+    container_name: 'golf-tracker-db'
+    env_file:
+      - .env
+    environment:
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      DB_PORT: ${DB_PORT}
+    ports: 
+      - "${DB_PORT}:${DB_PORT}"
+    volumes: 
+      - "./docker/dbInit:/docker-entrypoint-initdb.d"
