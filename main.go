@@ -6,6 +6,7 @@ import (
 	"strconv"
 
 	"github.com/alexanderlesser/golf-tracker/internal/db"
+	"github.com/alexanderlesser/golf-tracker/internal/routes"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 )
@@ -35,6 +36,8 @@ func main() {
 	}
 
 	r := gin.Default()
+
+	routes.RegisterClubRoutes(r, mysqlStorage)
 
 	r.GET("/", func(c *gin.Context) {
 		c.JSON(200, gin.H{
